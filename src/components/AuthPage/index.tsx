@@ -7,11 +7,16 @@ import {
     Form,
     InputForm,
     InputTitle,
-    InputWrapper, LinksBlock, ProfileAvatar,
-    ProfileAvatarBlock, ProfileLinks,
-    ProfileWrapper, SocialLinks, UserName,
+    InputWrapper,
+    LinksBlock,
+    ProfileAvatar,
+    ProfileAvatarBlock,
+    ProfileLinks,
+    ProfileWrapper,
+    SocialLinks,
+    UserName,
+    Wrapper,
 } from './components';
-import { Avatar } from '@mui/material';
 
 const ValidationForm = () => {
 
@@ -21,7 +26,7 @@ const ValidationForm = () => {
     });
 
     return (
-        <div>
+        <Wrapper>
             <ProfileWrapper>
                 <ProfileAvatarBlock>
                     <ProfileAvatar>ПШ</ProfileAvatar>
@@ -30,23 +35,35 @@ const ValidationForm = () => {
                     <UserName>Parviz Shirinov</UserName>
                     <LinksBlock>
                         <SocialLinks>
-                            <a href='https://t.me/Parveezy'>
+                            <a
+                                href='https://t.me/Parveezy'
+                                target='_blank'
+                                rel='noreferrer'>
                                 Telegram
                             </a>
                         </SocialLinks>
                         <SocialLinks>
-                            <a href='https://github.com/Parveeezy'>
+                            <a
+                                href='https://github.com/Parveeezy'
+                                target='_blank'
+                                rel="noreferrer"
+                            >
                                 GitHub
                             </a>
                         </SocialLinks>
                         <SocialLinks>
-                            <a href='https://hh.ru/resume/42600bd6ff0b2056050039ed1f70393175324a'>
+                            <a
+                                href='https://hh.ru/resume/42600bd6ff0b2056050039ed1f70393175324a'
+                                target='_blank'
+                                rel="noreferrer"
+                            >
                                 Resume
                             </a>
                         </SocialLinks>
                     </LinksBlock>
                 </ProfileLinks>
             </ProfileWrapper>
+
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{ email: '', tel: '' }}
@@ -97,7 +114,7 @@ const ValidationForm = () => {
                     )
                 }
             </Formik>
-        </div>
+        </Wrapper>
     );
 };
 

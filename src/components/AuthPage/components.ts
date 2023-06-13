@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 import { Avatar, Button, Container, TextField } from '@mui/material';
 
-export const ProfileWrapper = styled(Container)`
+export const Wrapper = styled(Container)`
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+`;
 
+export const ProfileWrapper = styled(Container)`
   padding-top: 25px;
-  margin-bottom: 25px;
   padding-bottom: 20px;
-  border-bottom: 2px solid rgba(128, 128, 128, 0.53);
+  margin-bottom: 25px;
+  border-bottom: 3px solid rgba(128, 128, 128, 0.73);
 
   &.MuiContainer-root {
-    max-width: 1200px;
-    padding-left: 15px;
+    padding-left: 0;
+    padding-right: 10px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -20,6 +26,15 @@ export const ProfileWrapper = styled(Container)`
 export const ProfileAvatarBlock = styled.div`
   width: 80px;
   height: 80px;
+  
+  @media screen and (max-width: 900px) {
+    width: 60px;
+    height: 60px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const ProfileAvatar = styled(Avatar)`
@@ -27,6 +42,13 @@ export const ProfileAvatar = styled(Avatar)`
     width: 100%;
     height: 100%;
     font-size: 40px;
+
+    @media screen and (max-width: 900px) {
+      font-size: 30px;
+    }
+    @media screen and (max-width: 500px) {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -36,10 +58,24 @@ export const ProfileLinks = styled.div`
   justify-content: center;
   align-items: start;
   margin-left: 40px;
+  @media screen and (max-width: 900px) {
+    margin-left: 20px;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const UserName = styled.h2`
   margin-bottom: 10px;
+  
+  @media screen and (max-width: 900px) {
+    font-size: 18px;
+  }
+  
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 `
 
 export const LinksBlock = styled.div`
@@ -57,6 +93,13 @@ export const SocialLinks = styled.div`
   & a:hover {
     color: orange;
   }
+  
+  @media screen and (max-width: 900px) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 `
 
 export const Form = styled('form')`
@@ -65,7 +108,8 @@ export const Form = styled('form')`
   align-items: start;
   justify-content: center;
   flex-direction: column;
-  padding: 15px 24px;
+  padding: 15px 0;
+  max-width: 310px;
 `;
 
 export const InputWrapper = styled.div`
@@ -73,8 +117,15 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  width: 500px;
+  width: 100%;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 900px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 70%;
+  }
 `;
 
 export const InputTitle = styled.div`
@@ -99,7 +150,7 @@ export const Error = styled.div`
   font-size: 14px;
 `;
 
-export const ButtonUI = styled(Button)`
+export const ButtonUI = styled(Button)`  
   &.MuiButton-root {
     padding: 15px 20px;
   }
