@@ -2,10 +2,9 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import {
-    ButtonUI,
     Error,
     Form,
-    InputForm,
+    InputForm, InputTel,
     InputTitle,
     InputWrapper,
     LinksBlock,
@@ -17,12 +16,15 @@ import {
     UserName,
     Wrapper,
 } from './components';
+import ButtonComponent from '../ui/ButtonUi';
 
 const ValidationForm = () => {
 
     const validationSchema = yup.object().shape({
+        tel: yup.string()
+            .matches(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+            { message: 'Неправильный номер', excludeEmptyString: false }),
         email: yup.string().required('Required').email('Invalid email address'),
-        tel: yup.string().required('Required'),
     });
 
     return (
@@ -46,7 +48,7 @@ const ValidationForm = () => {
                             <a
                                 href='https://github.com/Parveeezy'
                                 target='_blank'
-                                rel="noreferrer"
+                                rel='noreferrer'
                             >
                                 GitHub
                             </a>
@@ -55,7 +57,7 @@ const ValidationForm = () => {
                             <a
                                 href='https://hh.ru/resume/42600bd6ff0b2056050039ed1f70393175324a'
                                 target='_blank'
-                                rel="noreferrer"
+                                rel='noreferrer'
                             >
                                 Resume
                             </a>
@@ -77,7 +79,8 @@ const ValidationForm = () => {
 
                             <InputWrapper>
                                 <InputTitle>Номер телефона</InputTitle>
-                                <InputForm
+                                <InputTel
+                                    mask='+7 (999) 999-99-99'
                                     type='tel'
                                     name='tel'
                                     onChange={handleChange}
@@ -103,13 +106,13 @@ const ValidationForm = () => {
                                 </Error>
                             </InputWrapper>
 
-                            <ButtonUI
+                            <ButtonComponent
                                 type='submit'
+                                isSubmitting={isSubmitting}
                                 disabled={isSubmitting}
-                                variant='contained'
-                            >
-                                Начать
-                            </ButtonUI>
+                                text={"Начать"}
+                                id={'button-start'}
+                            />
                         </Form>
                     )
                 }

@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { Avatar, Button, Container, TextField } from '@mui/material';
+import ReactInputMask from 'react-input-mask';
 
 export const Wrapper = styled(Container)`
   margin-top: 10px;
   margin-right: 10px;
   border-radius: 5px;
   background-color: #ffffff;
+
+  &.MuiContainer-root {
+    max-width: 900px;
+  }
 `;
 
 export const ProfileWrapper = styled(Container)`
@@ -27,11 +32,11 @@ export const ProfileAvatarBlock = styled.div`
   width: 80px;
   height: 80px;
   
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 700px) {
     width: 60px;
     height: 60px;
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 450px) {
     width: 40px;
     height: 40px;
   }
@@ -132,6 +137,24 @@ export const InputTitle = styled.div`
   margin-bottom: 10px;
 `;
 
+
+export const InputTel = styled(ReactInputMask)`
+  width: 100%;
+  height: 57px;
+  border-radius: 3px;
+  border: 1px solid #c1c1c1;
+  padding-left: 10px;
+  margin-bottom: 10px;
+
+  &:hover {
+    border-color: #090909;
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    border-color: transparent;
+  }
+`;
 
 export const InputForm = styled(TextField)`
   width: 100%;
