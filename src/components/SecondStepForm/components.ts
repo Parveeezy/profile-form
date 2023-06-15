@@ -1,8 +1,18 @@
 import styled from 'styled-components';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, Container, TextField } from '@mui/material';
 import ReactInputMask from 'react-input-mask';
 
+export const FormContainer = styled(Container)`
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  max-width: 680px;
+`;
+
 export const Form = styled('form')`
+  margin-left: 23px;
   width: 100%;
 
   @media screen and (max-width: 900px) {
