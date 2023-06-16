@@ -141,30 +141,42 @@ export const InputTitle = styled.div`
 export const InputTel = styled(ReactInputMask)`
   width: 100%;
   height: 57px;
-  border-radius: 3px;
-  border: 1px solid #c1c1c1;
-  padding-left: 10px;
+  border-radius: 4px;
+  border: 2px solid #c1c1c1;
+  padding-left: 11px;
   margin-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.06);
+  outline: none;
+  
+
+  &::placeholder {
+    color: #a9a9a9;
+    font-size: 15px;
+  }
 
   &:hover {
-    border-color: #090909;
+    border: 2px solid #000000;
   }
 
   &:focus {
-    outline: 2px solid #1976d2;
-    border-color: transparent;
+    border: 2px solid #5558FA;
+    padding: 11px;
   }
 `;
 
 export const InputForm = styled(TextField)`
   width: 100%;
 
+  & .MuiOutlinedInput-root {
+    &.Mui-focused fieldset {
+      border: 2px solid #5558FA;
+      padding: 11px;
+    }
+  }
+  
   &.MuiFormControl-root {
     margin-bottom: 10px;
-  }
-
-  & label.Mui-focused {
-    color: #787878;
+    background-color: rgba(0, 0, 0, 0.06);
   }
 `;
 

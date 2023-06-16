@@ -33,15 +33,16 @@ export const Input = styled(ReactInputMask)`
   padding: 12px 12px;
   margin-bottom: 10px;
   border: 1px solid #c1c1c1;
-  border-radius: 3px;
-
-  &:active {
-    outline: none;
-    border-color: #b94c4c;
-  }
+  border-radius: 4px;
+  outline: none;
 
   &:hover {
-    border-color: black;
+    border: 1px solid #000000;
+  }
+
+  &:focus {
+    border: 2px solid #5558FA;
+    padding: 11px;
   }
 `;
 
@@ -52,7 +53,7 @@ export const InputSelect = styled(Autocomplete)`
   & .MuiInputBase-root {
     height: 42px;
     display: flex;
-    align-content: space-around
+    align-content: space-around;
   }
 `;
 
@@ -61,6 +62,13 @@ export const InputTextField = styled(TextField)`
     border: none;
     padding: 12px 12px;
     margin-bottom: 10px;
+  }
+
+  & .MuiOutlinedInput-root {
+    &.Mui-focused fieldset {
+      border: 2px solid #5558FA;
+      padding: 11px;
+    }
   }
 `;
 

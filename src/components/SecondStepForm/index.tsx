@@ -1,17 +1,26 @@
 import React from 'react';
+import * as yup from 'yup';
+import {  FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { Formik } from 'formik';
+
 import AppWrapper from '../ui/AppWrapper';
 import FormUi from '../ui/Form';
+import ButtonComponent from '../ui/ButtonUi';
 import {
+    AddInput,
     ButtonsBlock,
+    CheckboxGroupTitle,
+    CheckboxGroupWrapper,
+    CheckboxItemNumber,
+    CheckboxItemWrapper,
     Form,
     FormWrapper,
     Input,
+    InputsBlock,
     InputTip,
     InputTitle,
-} from '../FirstStepForm/components';
-import ButtonComponent from '../ui/ButtonUi';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+} from './components';
+import CheckboxUI from '../ui/CheckboxUI';
 
 const SecondStepForm = () => {
 
@@ -38,24 +47,55 @@ const SecondStepForm = () => {
 
                             <FormWrapper>
 
-                                <InputTitle>Advantages</InputTitle>
-                                <Input
-                                    mask={''}
-                                    type='nickname'
-                                    name='nickname'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.nickname}
-                                    placeholder={'Placeholder'}
-                                />
-                                <InputTip>{errors.nickname && touched.nickname && errors.nickname}</InputTip>
+                                <InputsBlock>
+                                    <InputTitle>Advantages</InputTitle>
+                                    <Input
+                                        mask={''}
+                                        type='nickname'
+                                        name='nickname'
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.nickname}
+                                        placeholder={'Placeholder'}
+                                    />
+                                    <InputTip>{errors.nickname && touched.nickname && errors.nickname}</InputTip>
 
-                                <ButtonComponent
-                                    text={'+'}
-                                    type={'submit'}
-                                    id={'button-add'}
-                                />
+                                    <AddInput
+                                        variant={'outlined'}
+                                        type={'submit'}
+                                        id={'button-add'}
+                                    >+</AddInput>
+                                </InputsBlock>
 
+                                <CheckboxGroupWrapper>
+                                    <CheckboxGroupTitle>Checkbox group</CheckboxGroupTitle>
+
+                                    <CheckboxItemWrapper>
+                                        <CheckboxUI />
+                                        <CheckboxItemNumber>1</CheckboxItemNumber>
+                                    </CheckboxItemWrapper>
+
+                                    <CheckboxItemWrapper>
+                                        <CheckboxUI />
+                                        <CheckboxItemNumber>2</CheckboxItemNumber>
+                                    </CheckboxItemWrapper>
+
+                                    <CheckboxItemWrapper>
+                                        <CheckboxUI />
+                                        <CheckboxItemNumber>3</CheckboxItemNumber>
+                                    </CheckboxItemWrapper>
+                                </CheckboxGroupWrapper>
+
+                                <RadioGroup
+                                    aria-labelledby="demo-radio-buttons-group-label"
+                                    defaultValue="1"
+                                    name="radio-buttons-group"
+                                >
+                                    <CheckboxGroupTitle>Radio Group</CheckboxGroupTitle>
+                                    <FormControlLabel value="1" control={<Radio />} label="1" />
+                                    <FormControlLabel value="2" control={<Radio />} label="2" />
+                                    <FormControlLabel value="3" control={<Radio />} label="3" />
+                                </RadioGroup>
 
                                 <ButtonsBlock>
                                     <ButtonComponent
@@ -78,7 +118,7 @@ const SecondStepForm = () => {
                     )}
                 </Formik>
             </FormUi>
-            
+
         </AppWrapper>
     );
 };

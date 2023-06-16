@@ -4,7 +4,7 @@ import { Container } from '@mui/material';
 export const Wrapper = styled(Container)`
   margin-top: 10px;
   margin-right: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #ffffff;
   margin-bottom: 30px;
   

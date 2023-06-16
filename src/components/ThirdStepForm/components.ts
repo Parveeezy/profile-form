@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ReactInputMask from 'react-input-mask';
 import { Button } from '@mui/material';
 
 
@@ -13,7 +12,7 @@ export const Form = styled('form')`
   @media screen and (max-width: 850px) {
     margin-left: 0;
   }
-  
+
   @media screen and (max-width: 750px) {
     margin-left: 0;
   }
@@ -29,14 +28,25 @@ export const InputTitle = styled('div')`
   margin-bottom: 10px;
 `;
 
-export const Input = styled(ReactInputMask)`
-  width: 50%;
-  padding: 12px 12px;
-  margin-bottom: 10px;
+
+export const AddInput = styled(Button)`
+  &.MuiButton-root {
+    font-size: 24px;
+    font-weight: bold;
+  }
+`;
+
+export const TextArea = styled('textarea')`
+  width: 100%;
+  min-height: 84px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 12px;
+  resize: vertical;
   border: 1px solid #c1c1c1;
   border-radius: 4px;
   outline: none;
-
+  
   &:hover {
     border: 1px solid #000000;
   }
@@ -47,36 +57,6 @@ export const Input = styled(ReactInputMask)`
   }
 `;
 
-export const AddInput = styled(Button)`
-  &.MuiButton-root {
-    font-size: 24px;
-    font-weight: bold;
-  }
-`;
-
-export const CheckboxGroupWrapper = styled('div')`
-  margin-top: 24px;
-  margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const CheckboxGroupTitle = styled('div')`
-  font-weight: 400;
-  font-size: 14px;
-  color: #333333;
-  margin-bottom: 2px;
-`;
-
-export const CheckboxItemWrapper = styled('div')`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-`;
-
-export const CheckboxItemNumber = styled('div')`
-    
-`;
 
 
 export const InputTip = styled('div')`

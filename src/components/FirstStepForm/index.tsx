@@ -15,18 +15,12 @@ import ButtonComponent from '../ui/ButtonUi';
 import AppWrapper from '../ui/AppWrapper';
 import FormUi from '../ui/Form';
 
-// enum Sex {
-//     Man = "Man",
-//     Woman = "Woman",
-// }
-
-
 const FirstStepForm = () => {
     const enum Sex {
-        Man = "Man",
-        Woman = "Woman",
+        Man = 'Man',
+        Woman = 'Woman',
     }
-    
+
     const options = [Sex.Man, Sex.Woman];
     const [value, setValue] = React.useState<string | null>(options[0]);
     const [inputValue, setInputValue] = React.useState('');

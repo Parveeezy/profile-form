@@ -86,6 +86,7 @@ const ValidationForm = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.tel}
+                                    placeholder='+7 999 999-99-99'
                                 />
                                 <Error style={{ marginBottom: '10px' }}>
                                     {errors.tel && touched.tel && errors.tel}
@@ -100,6 +101,7 @@ const ValidationForm = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.email}
+                                    placeholder='shirinov-2011@bk.ru'
                                 />
                                 <Error style={{ marginBottom: '10px' }}>
                                     {errors.email && touched.email && errors.email}
