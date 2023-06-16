@@ -28,8 +28,6 @@ const SecondStepForm = () => {
                     validationSchema={validationSchema}
                     initialValues={{
                         nickname: '',
-                        name: '',
-                        surname: '',
                     }}
                     onSubmit={values => {
                         console.log('submit', values);
@@ -40,7 +38,7 @@ const SecondStepForm = () => {
 
                             <FormWrapper>
 
-                                <InputTitle>Nickname</InputTitle>
+                                <InputTitle>Advantages</InputTitle>
                                 <Input
                                     mask={''}
                                     type='nickname'
@@ -48,33 +46,15 @@ const SecondStepForm = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.nickname}
-                                    placeholder={'Nickname'}
+                                    placeholder={'Placeholder'}
                                 />
                                 <InputTip>{errors.nickname && touched.nickname && errors.nickname}</InputTip>
 
-                                <InputTitle>Name</InputTitle>
-                                <Input
-                                    mask={''}
-                                    type='name'
-                                    name='name'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                    placeholder={'Name'}
+                                <ButtonComponent
+                                    text={'+'}
+                                    type={'submit'}
+                                    id={'button-add'}
                                 />
-                                <InputTip>{errors.name && touched.name && errors.name}</InputTip>
-
-                                <InputTitle>Surname</InputTitle>
-                                <Input
-                                    mask={''}
-                                    type='surname'
-                                    name='surname'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.surname}
-                                    placeholder={'Surname'}
-                                />
-                                <InputTip>{errors.surname && touched.surname && errors.surname}</InputTip>
 
 
                                 <ButtonsBlock>

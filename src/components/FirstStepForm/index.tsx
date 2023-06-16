@@ -22,11 +22,10 @@ enum Sex {
 
 
 const FirstStepForm = () => {
-    const options = Sex;
+
+    const options = ['Man', 'Woman'];
     const [value, setValue] = React.useState<string | null>(options[0]);
     const [inputValue, setInputValue] = React.useState('');
-
-    console.log(options);
 
     const validationSchema = yup.object().shape({
         nickname: yup.string().required('Required').max(30),
