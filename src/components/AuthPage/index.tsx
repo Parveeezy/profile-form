@@ -17,6 +17,7 @@ import {
     Wrapper,
 } from './components';
 import ButtonComponent from '../ui/ButtonUi';
+import { Link } from 'react-router-dom';
 
 const ValidationForm = () => {
 
@@ -107,14 +108,15 @@ const ValidationForm = () => {
                                     {errors.email && touched.email && errors.email}
                                 </Error>
                             </InputWrapper>
-
-                            <ButtonComponent
-                                type='submit'
-                                isSubmitting={isSubmitting}
-                                disabled={isSubmitting}
-                                text={"Начать"}
-                                id={'button-start'}
-                            />
+                            <Link to={'/first'}>
+                                <ButtonComponent
+                                    type='submit'
+                                    isSubmitting={isSubmitting}
+                                    disabled={isSubmitting}
+                                    text={"Начать"}
+                                    id={'button-start'}
+                                />
+                            </Link>
                         </Form>
                     )
                 }

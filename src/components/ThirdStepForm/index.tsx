@@ -2,7 +2,6 @@ import React from 'react';
 import AppWrapper from '../ui/AppWrapper';
 import FormUi from '../ui/Form';
 import {
-    AddInput,
     ButtonsBlock,
     Form,
     FormWrapper,
@@ -13,6 +12,7 @@ import {
 import ButtonComponent from '../ui/ButtonUi';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 
 const ThirdStepForm = () => {
 
@@ -52,22 +52,26 @@ const ThirdStepForm = () => {
                                 </InputsBlock>
 
                                 <ButtonsBlock>
-                                    <ButtonComponent
-                                        type='submit'
-                                        disabled={isSubmitting}
-                                        text={'Назад'}
-                                        id={'button-back'}
-                                    />
-                                    <ButtonComponent
-                                        type='submit'
-                                        disabled={isSubmitting}
-                                        text={'Далее'}
-                                        id={'button-next'}
-                                    />
+                                    <Link to={'/second'}>
+                                        <ButtonComponent
+                                            type='submit'
+                                            disabled={isSubmitting}
+                                            text={'Назад'}
+                                            id={'button-back'}
+                                        />
+                                    </Link>
+
+                                    <Link to={'/'}>
+                                        <ButtonComponent
+                                            type='submit'
+                                            disabled={isSubmitting}
+                                            text={'Отправить'}
+                                            id={'button-next'}
+                                        />
+                                    </Link>
                                 </ButtonsBlock>
 
                             </FormWrapper>
-
                         </Form>
                     )}
                 </Formik>

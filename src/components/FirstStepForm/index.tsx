@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import ButtonComponent from '../ui/ButtonUi';
 import AppWrapper from '../ui/AppWrapper';
 import FormUi from '../ui/Form';
+import { Link } from 'react-router-dom';
 
 const FirstStepForm = () => {
     const enum Sex {
@@ -32,6 +33,11 @@ const FirstStepForm = () => {
         sex: yup.string().required('Required'),
     });
 
+    const handleChange = (e: any) => {
+        console.log(e);
+        setInputValue(e.target.outerText)
+    }
+
     return (
         <AppWrapper>
             <FormUi>
@@ -48,7 +54,7 @@ const FirstStepForm = () => {
                         console.log('submit', values);
                     }}
                 >
-                    {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+                    {({ values, errors, touched, handleBlur, handleSubmit, isSubmitting }) => (
                         <Form onSubmit={handleSubmit}>
 
                             <FormWrapper>
@@ -60,7 +66,7 @@ const FirstStepForm = () => {
                                     name='nickname'
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.nickname}
+                                    value={inputValue}
                                     placeholder={'Nickname'}
                                 />
                                 <InputTip>{errors.nickname && touched.nickname && errors.nickname}</InputTip>
@@ -93,9 +99,8 @@ const FirstStepForm = () => {
                                 <InputSelect
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    placeholder={'Sex'}
                                     options={options}
-                                    value={values.sex}
+                                    value={value}
                                     renderInput={params => (
                                         <InputTextField
                                             {...params}
@@ -107,18 +112,24 @@ const FirstStepForm = () => {
                                 <InputTip>{errors.sex && touched.sex && errors.sex}</InputTip>
 
                                 <ButtonsBlock>
-                                    <ButtonComponent
-                                        type='submit'
-                                        disabled={isSubmitting}
-                                        text={'Назад'}
-                                        id={'button-back'}
-                                    />
-                                    <ButtonComponent
-                                        type='submit'
-                                        disabled={isSubmitting}
-                                        text={'Далее'}
-                                        id={'button-next'}
-                                    />
+                                    <Link to={'/'}>
+                                        <ButtonComponent
+                                            type='submit'
+                                            disabled={isSubmitting}
+                                            text={'Назад'}
+                                            id={'button-back'}
+                                        />
+                                    </Link>
+
+                                    <Link to={'/second'}>
+                                        <ButtonComponent
+                                            type='submit'
+                                            disabled={isSubmitting}
+                                            text={'Далее'}
+                                            id={'button-next'}
+                                        />
+                                    </Link>
+
                                 </ButtonsBlock>
 
                             </FormWrapper>

@@ -21,6 +21,7 @@ import {
     InputTitle,
 } from './components';
 import CheckboxUI from '../ui/CheckboxUI';
+import { Link } from 'react-router-dom';
 
 const SecondStepForm = () => {
 
@@ -98,18 +99,23 @@ const SecondStepForm = () => {
                                 </RadioGroup>
 
                                 <ButtonsBlock>
-                                    <ButtonComponent
-                                        type='submit'
-                                        disabled={isSubmitting}
-                                        text={'Назад'}
-                                        id={'button-back'}
-                                    />
-                                    <ButtonComponent
-                                        type='submit'
-                                        disabled={isSubmitting}
-                                        text={'Далее'}
-                                        id={'button-next'}
-                                    />
+                                    <Link to={'/first'}>
+                                        <ButtonComponent
+                                            type='submit'
+                                            disabled={isSubmitting}
+                                            text={'Назад'}
+                                            id={'button-back'}
+                                        />
+                                    </Link>
+
+                                    <Link to={'/third'}>
+                                        <ButtonComponent
+                                            type='submit'
+                                            disabled={isSubmitting}
+                                            text={'Далее'}
+                                            id={'button-next'}
+                                        />
+                                    </Link>
                                 </ButtonsBlock>
 
                             </FormWrapper>
