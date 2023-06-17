@@ -1,10 +1,11 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { FormikProps, useFormik } from 'formik';
 import * as yup from 'yup';
 import {
     Error,
     Form,
-    InputForm, InputTel,
+    InputForm,
+    InputTel,
     InputTitle,
     InputWrapper,
     LinksBlock,
@@ -17,15 +18,42 @@ import {
     Wrapper,
 } from './components';
 import ButtonComponent from '../ui/ButtonUi';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { nextStep } from '../../store/slices/StepSlice/StepSlice';
+import { AppDispatch } from '../../store/store';
+
+type FormikType = {
+    tel: string
+    email: string
+}
 
 const ValidationForm = () => {
 
+    const dispatch = useDispatch<AppDispatch>();
+
     const validationSchema = yup.object().shape({
         tel: yup.string()
-            .matches(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
-            { message: 'Неправильный номер', excludeEmptyString: false }),
+            .matches(/^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/,
+                { message: 'Неправильный номер', excludeEmptyString: false }),
         email: yup.string().required('Required').email('Invalid email address'),
+    });
+
+    const submitHandleClick = (val: any) => {
+        dispatch(nextStep())
+    };
+
+    const {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+    }: FormikProps<FormikType> = useFormik({
+        initialValues: { email: '', tel: '' },
+        validationSchema: validationSchema,
+        onSubmit: values => submitHandleClick(values),
     });
 
     return (
@@ -66,61 +94,53 @@ const ValidationForm = () => {
                     </LinksBlock>
                 </ProfileLinks>
             </ProfileWrapper>
+            {(
+                <>
+                    <Form onSubmit={handleSubmit}>
+                        <InputWrapper>
+                            <InputTitle>Номер телефона</InputTitle>
+                            <InputTel
+                                mask='+7 (999) 999-99-99'
+                                type='tel'
+                                name='tel'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.tel}
+                                placeholder='+7 999 999-99-99'
+                            />
+                            <Error style={{ marginBottom: '10px' }}>
+                                {errors.tel && touched.tel && errors.tel}
+                            </Error>
+                        </InputWrapper>
 
-            <Formik
-                validationSchema={validationSchema}
-                initialValues={{ email: '', tel: '' }}
-                onSubmit={values => {
-                    console.log('submit', values);
-                }}
-            >
-                {
-                    ({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-                        <Form onSubmit={handleSubmit}>
+                        <InputWrapper>
+                            <InputTitle>Email</InputTitle>
+                            <InputForm
+                                type='email'
+                                name='email'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                                placeholder='shirinov-2011@bk.ru'
+                            />
+                            <Error style={{ marginBottom: '10px' }}>
+                                {errors.email && touched.email && errors.email}
+                            </Error>
+                        </InputWrapper>
 
-                            <InputWrapper>
-                                <InputTitle>Номер телефона</InputTitle>
-                                <InputTel
-                                    mask='+7 (999) 999-99-99'
-                                    type='tel'
-                                    name='tel'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.tel}
-                                    placeholder='+7 999 999-99-99'
-                                />
-                                <Error style={{ marginBottom: '10px' }}>
-                                    {errors.tel && touched.tel && errors.tel}
-                                </Error>
-                            </InputWrapper>
+                        <ButtonComponent
+                            type={'submit'}
+                            onClick={handleSubmit}
+                            isSubmitting={isSubmitting}
+                            disabled={isSubmitting}
+                            text={'Начать'}
+                            id={'button-start'}
+                        />
 
-                            <InputWrapper>
-                                <InputTitle>Email</InputTitle>
-                                <InputForm
-                                    type='email'
-                                    name='email'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                    placeholder='shirinov-2011@bk.ru'
-                                />
-                                <Error style={{ marginBottom: '10px' }}>
-                                    {errors.email && touched.email && errors.email}
-                                </Error>
-                            </InputWrapper>
-                            <Link to={'/first'}>
-                                <ButtonComponent
-                                    type='submit'
-                                    isSubmitting={isSubmitting}
-                                    disabled={isSubmitting}
-                                    text={"Начать"}
-                                    id={'button-start'}
-                                />
-                            </Link>
-                        </Form>
-                    )
-                }
-            </Formik>
+                    </Form>
+
+                </>
+            )}
         </Wrapper>
     );
 };

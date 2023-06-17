@@ -5,8 +5,10 @@ type ButtonComponentType = {
     text: string
     isSubmitting?: boolean
     disabled?: boolean
-    type: string
+    type?: string
     id: string
+    onClick?: () => void
+    children?: any
 }
 
 const ButtonComponent = (props: ButtonComponentType) => {
@@ -17,6 +19,7 @@ const ButtonComponent = (props: ButtonComponentType) => {
             variant={props.id === 'button-start' || props.id === 'button-next' ? 'contained' : 'outlined'}
         >
             {props.text}
+            {props.children}
         </ButtonUI>
     );
 };
