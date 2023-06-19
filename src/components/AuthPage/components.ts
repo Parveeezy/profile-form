@@ -183,6 +183,7 @@ export const InputForm = styled(TextField)`
 export const Error = styled.div`
   color: red;
   font-size: 14px;
+  margin-bottom: 10px;
 `;
 
 export const ButtonUI = styled(Button)`  

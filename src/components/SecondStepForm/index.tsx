@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
-import {  FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { Formik } from 'formik';
+import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { FormikProps, useFormik } from 'formik';
 
 import AppWrapper from '../ui/AppWrapper';
 import FormUi from '../ui/Form';
@@ -21,108 +21,132 @@ import {
     InputTitle,
 } from './components';
 import CheckboxUI from '../ui/CheckboxUI';
-import { Link } from 'react-router-dom';
+import { nextStep, prevStep } from '../../store/slices/StepSlice/StepSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+
+type FormikType = {
+    advantages: ''
+    radio: number
+    checkbox: number
+}
 
 const SecondStepForm = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    const [checkboxGroupValue, setCheckboxGroupValue] = useState([]);
+
+    const [radioGroupValue, setRadioGroupValue] = useState(null);
+
+    const handleChangeCheckboxGroup = (items: any) => {
+        setCheckboxGroupValue(items);
+    };
+
+    const handleChangeRadioGroup = (value: any) => {
+        setRadioGroupValue(value);
+    };
 
     const validationSchema = yup.object().shape({
-        nickname: yup.string().required('Required').max(30),
-        name: yup.string().required('Required'),
-        surname: yup.string().required('Required'),
+        advantages: yup.string().required('Required'),
+        radio: yup.number().required('Required'),
+        checkbox: yup.number().required('Required'),
     });
+
+    const submitHandleClick = () => {
+        dispatch(nextStep());
+    };
+
+    const prevHandleClick = () => {
+        dispatch(prevStep());
+    };
+
+    const {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+    }: FormikProps<FormikType> = useFormik({
+        initialValues: { advantages: '', radio: 1, checkbox: 1 },
+        validationSchema: validationSchema,
+        onSubmit: submitHandleClick,
+    });
+
 
     return (
         <AppWrapper>
             <FormUi>
-                <Formik
-                    validationSchema={validationSchema}
-                    initialValues={{
-                        nickname: '',
-                    }}
-                    onSubmit={values => {
-                        console.log('submit', values);
-                    }}
-                >
-                    {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-                        <Form onSubmit={handleSubmit}>
+                {(
+                    <Form onSubmit={handleSubmit}>
+                        <FormWrapper>
+                            <InputsBlock>
+                                <InputTitle>Advantages</InputTitle>
+                                <Input
+                                    mask={''}
+                                    type='advantages'
+                                    name='advantages'
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.advantages}
+                                    placeholder={'Placeholder'}
+                                />
+                                <InputTip>{errors.advantages && touched.advantages && errors.advantages}</InputTip>
 
-                            <FormWrapper>
+                                <AddInput
+                                    variant={'outlined'}
+                                    type={'submit'}
+                                    id={'button-add'}
+                                >+</AddInput>
+                            </InputsBlock>
 
-                                <InputsBlock>
-                                    <InputTitle>Advantages</InputTitle>
-                                    <Input
-                                        mask={''}
-                                        type='nickname'
-                                        name='nickname'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.nickname}
-                                        placeholder={'Placeholder'}
+                            <CheckboxGroupWrapper>
+                                <CheckboxItemWrapper>
+                                    <CheckboxUI
+                                        items={[
+                                            { value: 1, label: '1' },
+                                            { value: 2, label: '2' },
+                                            { value: 3, label: '3' },
+                                        ]}
+                                        label='Checkbox group'
+                                        onChange={handleChangeCheckboxGroup}
+                                        value={checkboxGroupValue}
                                     />
-                                    <InputTip>{errors.nickname && touched.nickname && errors.nickname}</InputTip>
+                                </CheckboxItemWrapper>
+                            </CheckboxGroupWrapper>
 
-                                    <AddInput
-                                        variant={'outlined'}
-                                        type={'submit'}
-                                        id={'button-add'}
-                                    >+</AddInput>
-                                </InputsBlock>
 
-                                <CheckboxGroupWrapper>
-                                    <CheckboxGroupTitle>Checkbox group</CheckboxGroupTitle>
+                            <RadioGroup
+                                aria-labelledby='demo-radio-buttons-group-label'
+                                defaultValue={1}
+                                name='radio-buttons-group'
+                            >
+                                <CheckboxGroupTitle>Radio Group</CheckboxGroupTitle>
+                                <FormControlLabel value={1} control={<Radio />} label='1' />
+                                <FormControlLabel value={2} control={<Radio />} label='2' />
+                                <FormControlLabel value={3} control={<Radio />} label='3' />
+                            </RadioGroup>
 
-                                    <CheckboxItemWrapper>
-                                        <CheckboxUI />
-                                        <CheckboxItemNumber>1</CheckboxItemNumber>
-                                    </CheckboxItemWrapper>
+                            <ButtonsBlock>
+                                <ButtonComponent
+                                    type='submit'
+                                    disabled={isSubmitting}
+                                    text={'Назад'}
+                                    id={'button-back'}
+                                    onClick={prevHandleClick}
+                                />
 
-                                    <CheckboxItemWrapper>
-                                        <CheckboxUI />
-                                        <CheckboxItemNumber>2</CheckboxItemNumber>
-                                    </CheckboxItemWrapper>
-
-                                    <CheckboxItemWrapper>
-                                        <CheckboxUI />
-                                        <CheckboxItemNumber>3</CheckboxItemNumber>
-                                    </CheckboxItemWrapper>
-                                </CheckboxGroupWrapper>
-
-                                <RadioGroup
-                                    aria-labelledby="demo-radio-buttons-group-label"
-                                    defaultValue="1"
-                                    name="radio-buttons-group"
-                                >
-                                    <CheckboxGroupTitle>Radio Group</CheckboxGroupTitle>
-                                    <FormControlLabel value="1" control={<Radio />} label="1" />
-                                    <FormControlLabel value="2" control={<Radio />} label="2" />
-                                    <FormControlLabel value="3" control={<Radio />} label="3" />
-                                </RadioGroup>
-
-                                <ButtonsBlock>
-                                    <Link to={'/first'}>
-                                        <ButtonComponent
-                                            type='submit'
-                                            disabled={isSubmitting}
-                                            text={'Назад'}
-                                            id={'button-back'}
-                                        />
-                                    </Link>
-
-                                    <Link to={'/third'}>
-                                        <ButtonComponent
-                                            type='submit'
-                                            disabled={isSubmitting}
-                                            text={'Далее'}
-                                            id={'button-next'}
-                                        />
-                                    </Link>
-                                </ButtonsBlock>
-
-                            </FormWrapper>
-
-                        </Form>
-                    )}
-                </Formik>
+                                <ButtonComponent
+                                    type='submit'
+                                    disabled={isSubmitting}
+                                    text={'Далее'}
+                                    id={'button-next'}
+                                />
+                            </ButtonsBlock>
+                        </FormWrapper>
+                    </Form>
+                )}
             </FormUi>
 
         </AppWrapper>

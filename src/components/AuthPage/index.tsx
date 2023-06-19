@@ -1,6 +1,14 @@
 import React from 'react';
-import { FormikProps, useFormik } from 'formik';
+
 import * as yup from 'yup';
+
+import { FormikProps, useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+
+import { AppDispatch } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { nextStep } from '../../store/slices/StepSlice/StepSlice';
+
 import {
     Error,
     Form,
@@ -17,17 +25,16 @@ import {
     UserName,
     Wrapper,
 } from './components';
+
 import ButtonComponent from '../ui/ButtonUi';
-import { useDispatch } from 'react-redux';
-import { nextStep } from '../../store/slices/StepSlice/StepSlice';
-import { AppDispatch } from '../../store/store';
 
 type FormikType = {
     tel: string
     email: string
 }
-
 const ValidationForm = () => {
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -38,8 +45,9 @@ const ValidationForm = () => {
         email: yup.string().required('Required').email('Invalid email address'),
     });
 
-    const submitHandleClick = (val: any) => {
-        dispatch(nextStep())
+    const submitHandleClick = () => {
+        navigate('/create');
+        dispatch(nextStep());
     };
 
     const {
@@ -53,7 +61,7 @@ const ValidationForm = () => {
     }: FormikProps<FormikType> = useFormik({
         initialValues: { email: '', tel: '' },
         validationSchema: validationSchema,
-        onSubmit: values => submitHandleClick(values),
+        onSubmit: submitHandleClick,
     });
 
     return (
@@ -108,7 +116,7 @@ const ValidationForm = () => {
                                 value={values.tel}
                                 placeholder='+7 999 999-99-99'
                             />
-                            <Error style={{ marginBottom: '10px' }}>
+                            <Error>
                                 {errors.tel && touched.tel && errors.tel}
                             </Error>
                         </InputWrapper>
@@ -123,7 +131,7 @@ const ValidationForm = () => {
                                 value={values.email}
                                 placeholder='shirinov-2011@bk.ru'
                             />
-                            <Error style={{ marginBottom: '10px' }}>
+                            <Error>
                                 {errors.email && touched.email && errors.email}
                             </Error>
                         </InputWrapper>
@@ -136,9 +144,7 @@ const ValidationForm = () => {
                             text={'Начать'}
                             id={'button-start'}
                         />
-
                     </Form>
-
                 </>
             )}
         </Wrapper>

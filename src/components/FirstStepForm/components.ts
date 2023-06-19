@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Autocomplete, TextField } from '@mui/material';
+import { Select } from '@mui/material';
 import ReactInputMask from 'react-input-mask';
 
 export const Form = styled('form')`
@@ -46,25 +46,17 @@ export const Input = styled(ReactInputMask)`
   }
 `;
 
-export const InputSelect = styled(Autocomplete)`
+export const InputSelect = styled(Select)`
   width: 50%;
   margin-bottom: 10px;
 
-  & .MuiInputBase-root {
+  &.MuiInputBase-root {
     height: 42px;
     display: flex;
     align-content: space-around;
   }
-`;
 
-export const InputTextField = styled(TextField)`
-  &.MuiInputBase-root {
-    border: none;
-    padding: 12px 12px;
-    margin-bottom: 10px;
-  }
-
-  & .MuiOutlinedInput-root {
+  &.MuiOutlinedInput-root {
     &.Mui-focused fieldset {
       border: 2px solid #5558FA;
       padding: 11px;
